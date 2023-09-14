@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Code based on https://www.youtube.com/watch?v=_QajrabyTJc&t=1003s
+
 public class PlayerLook : MonoBehaviour
 {
     
@@ -27,7 +29,7 @@ public class PlayerLook : MonoBehaviour
         // Get the mouse Y axis
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY; // Rotate the camera on the X axis
+        xRotation -= mouseY; 
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Clamp the camera on the X axis
 
 

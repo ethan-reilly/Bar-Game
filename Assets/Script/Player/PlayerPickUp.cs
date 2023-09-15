@@ -58,7 +58,7 @@ public class PlayerPickUp : MonoBehaviour
             pickUpUI.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && hit.collider != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log("Press 'E' "  + hit.collider.name);
             Interact();
@@ -69,24 +69,26 @@ public class PlayerPickUp : MonoBehaviour
     private void Interact()
     {
         //   Debug.Log("Picking up " + hit.collider.name);
-
-        Debug.Log("In hand item " + inHandItem.transform.localPosition);
-        Debug.Log("Hit collider name " + hit.collider.name);
-
-        Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-        inHandItem = hit.collider.gameObject;
-        inHandItem.transform.position = Vector3.zero;
-        inHandItem.transform.rotation = Quaternion.identity;
-        inHandItem.transform.SetParent(pickUpParent.transform, false);
-        
-        if(rb != null)
+        if (hit.collider != null)
         {
-            rb.isKinematic = true;
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+            inHandItem = hit.collider.gameObject;
+            inHandItem.transform.position = Vector3.zero;
+            //inHandItem.transform.rotation = Quaternion.identity;
+            inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+            inHandItem.transform.SetParent(pickUpParent.transform, false);
+
+            //Debug.Log("In hand item " + inHandItem.transform.localPosition);
+            //Debug.Log("Pick up slot " + pickUpParent.transform.position);
+
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            return;
         }
-
-        return;
-
     }
      
 }

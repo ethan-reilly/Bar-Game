@@ -17,6 +17,12 @@ public class PlayerPickUp : MonoBehaviour
     private GameObject pickUpUI;
 
     [SerializeField]
+    private Transform pickUpParent;
+
+    [SerializeField]
+    private GameObject inHandItem;
+
+    [SerializeField]
     [Min(1)]
     private float hitRange = 3;
 
@@ -25,13 +31,23 @@ public class PlayerPickUp : MonoBehaviour
 
     private void Update()
     {
+       
+
         Debug.DrawRay(playerCameraTransform.position, 
             playerCameraTransform.forward * hitRange, Color.red);
+
         if (hit.collider != null)
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
             pickUpUI.SetActive(false);
         }
+
+        if (inHandItem != null)
+        {
+            return;
+        }
+        
+        
         if(Physics.Raycast(playerCameraTransform.position,
             playerCameraTransform.forward,
             out hit,
@@ -41,6 +57,37 @@ public class PlayerPickUp : MonoBehaviour
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
             pickUpUI.SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && hit.collider != null)
+        {
+            //Debug.Log("Press 'E' "  + hit.collider.name);
+            Interact();
+        }
+
     }
 
+    private void Interact()
+    {
+        //   Debug.Log("Picking up " + hit.collider.name);
+
+        Debug.Log("In hand item " + inHandItem.transform.localPosition);
+        Debug.Log("Hit collider name " + hit.collider.name);
+
+        Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+        inHandItem = hit.collider.gameObject;
+        inHandItem.transform.position = Vector3.zero;
+        inHandItem.transform.rotation = Quaternion.identity;
+        inHandItem.transform.SetParent(pickUpParent.transform, false);
+        
+        if(rb != null)
+        {
+            rb.isKinematic = true;
+        }
+
+        return;
+
+    }
+     
 }
+

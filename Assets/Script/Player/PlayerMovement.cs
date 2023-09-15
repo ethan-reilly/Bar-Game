@@ -23,8 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask; // Ground layer
 
     bool isGrounded;
-    
-    // Update is called once per frame
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance,
@@ -47,8 +46,6 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(move * (speed * 1.4f) * Time.deltaTime);
             
         }
-
-
             controller.Move(move * speed * Time.deltaTime);
 
         // Jump
@@ -61,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime); // Apply gravity, Time.deltaTime multiplied twice because
                                                     // time is squared
 
-        
+     
+
     }
 }

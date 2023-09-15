@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2629637429383145797}
   - component: {fileID: -5440077274211739949}
   - component: {fileID: -9110658448792413892}
+  - component: {fileID: -5828171276443204366}
   m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4575275963417069712}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -12.9094715, y: -7.795602, z: 9.053371}
-  m_LocalScale: {x: 6.1675763, y: 6.1675763, z: 6.1675763}
+  m_LocalScale: {x: 24.36, y: 24.36, z: 24.36}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,3 +115,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02011416, y: 0.020114155, z: 0.040894493}
   m_Center: {x: 4.6566134e-10, y: 1.7929305e-18, z: 0.0002523325}
+--- !u!114 &-5828171276443204366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575275963417069712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00d70c583a92c54781fa4d02cfbae47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 2629637429383145797}
+  color: {r: 0, g: 1, b: 0.99999976, a: 1}

@@ -11,6 +11,9 @@ public class PlayerPickUp : MonoBehaviour
     private LayerMask pickableLayerMask;
 
     [SerializeField]
+    private LayerMask tapLayerMask;
+
+    [SerializeField]
     private Transform playerCameraTransform;
 
     [SerializeField]
@@ -24,6 +27,9 @@ public class PlayerPickUp : MonoBehaviour
 
     [SerializeField]
     private Transform glassesEmpty;
+
+    [SerializeField]
+    private bool pourDrink = false;
 
     [SerializeField]
     [Min(1)]
@@ -51,6 +57,31 @@ public class PlayerPickUp : MonoBehaviour
             {
                 Drop();
             }
+
+            if (Physics.Raycast(playerCameraTransform.position,
+           playerCameraTransform.forward,
+           out hit,
+           hitRange,
+           tapLayerMask))
+            {
+                //Debug.Log("Tap");
+                hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
+
+                if (inHandItem != null && Input.GetKeyDown(KeyCode.Q))
+                {
+                    pourDrink = true;
+                }
+                else
+                {
+                    pourDrink = false;
+                }
+            }
+            if(pourDrink)
+            {
+                inHandItem.GetComponent<Glass>().FillGlass();
+            }
+
+       
             return;
         }
 
@@ -69,7 +100,9 @@ public class PlayerPickUp : MonoBehaviour
         {
             //Debug.Log("Press 'E' "  + hit.collider.name);
             Interact();
+            
         }
+
 
     }
 
@@ -78,30 +111,31 @@ public class PlayerPickUp : MonoBehaviour
         //   Debug.Log("Picking up " + hit.collider.name);
         if (hit.collider != null)
         {
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-            inHandItem = hit.collider.gameObject;
-            inHandItem.transform.position = Vector3.zero;
-            //inHandItem.transform.rotation = Quaternion.identity;
-            inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
-            inHandItem.transform.SetParent(pickUpParent.transform, false);
-
-
-
-            if (rb != null)
+            if (hit.collider.GetComponent<Glass>())
             {
-                rb.isKinematic = true;
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+                inHandItem = hit.collider.gameObject;
+                inHandItem.transform.position = Vector3.zero;
+                //inHandItem.transform.rotation = Quaternion.identity;
+                inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                inHandItem.transform.SetParent(pickUpParent.transform, false);
+
+                if (rb != null)
+                {
+                    rb.isKinematic = true;
+                }
+
+                return;
             }
 
-           return;
+            //Debug.Log("Interact ended");
         }
-
-        //Debug.Log("Interact ended");
     }
+     
 
-
-    private void Drop()
-    { 
+         private void Drop()
+        { 
         //Dropping the item
         if (inHandItem !=null)
         {
@@ -115,6 +149,9 @@ public class PlayerPickUp : MonoBehaviour
         }
         //return;
     }
+         
+
+   
      
 }
 

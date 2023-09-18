@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5440077274211739949}
   - component: {fileID: -9110658448792413892}
   - component: {fileID: -5828171276443204366}
+  - component: {fileID: 6168586745594505857}
   m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
@@ -130,3 +131,15 @@ MonoBehaviour:
   renderers:
   - {fileID: 2629637429383145797}
   color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+--- !u!114 &6168586745594505857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575275963417069712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714ac07f11d72f649ba98bc6c87e493d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

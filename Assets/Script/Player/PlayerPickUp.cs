@@ -23,6 +23,9 @@ public class PlayerPickUp : MonoBehaviour
     private GameObject inHandItem;
 
     [SerializeField]
+    private Transform glassesEmpty;
+
+    [SerializeField]
     [Min(1)]
     private float hitRange = 3;
 
@@ -31,8 +34,7 @@ public class PlayerPickUp : MonoBehaviour
 
     private void Update()
     {
-       
-
+        
         Debug.DrawRay(playerCameraTransform.position, 
             playerCameraTransform.forward * hitRange, Color.red);
 
@@ -41,14 +43,19 @@ public class PlayerPickUp : MonoBehaviour
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
             pickUpUI.SetActive(false);
         }
-
+        
         if (inHandItem != null)
         {
+            //Dropping
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                Drop();
+            }
             return;
         }
-        
-        
-        if(Physics.Raycast(playerCameraTransform.position,
+
+
+        if (Physics.Raycast(playerCameraTransform.position,
             playerCameraTransform.forward,
             out hit,
             hitRange,
@@ -79,16 +86,34 @@ public class PlayerPickUp : MonoBehaviour
             inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
             inHandItem.transform.SetParent(pickUpParent.transform, false);
 
-            //Debug.Log("In hand item " + inHandItem.transform.localPosition);
-            //Debug.Log("Pick up slot " + pickUpParent.transform.position);
+
 
             if (rb != null)
             {
                 rb.isKinematic = true;
             }
 
-            return;
+           return;
         }
+
+        //Debug.Log("Interact ended");
+    }
+
+
+    private void Drop()
+    { 
+        //Dropping the item
+        if (inHandItem !=null)
+        {
+            inHandItem.transform.SetParent(glassesEmpty);
+            inHandItem = null;
+            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+            }
+        }
+        //return;
     }
      
 }

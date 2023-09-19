@@ -8,28 +8,44 @@ public class Glass : MonoBehaviour
     private int amount = 0;
     private bool filled = false;
 
+    [SerializeField]
+    GameObject drink01;
+
+    [SerializeField]
+    GameObject drink02;
+
+
+    public void Start()
+    {
+        drink01.SetActive(false);
+        drink02.SetActive(false);
+    }
 
     public void FillGlass()
     {
         if(filled == false)
         {
-            Debug.Log("Filling Glass");
-            amount += 25;
+            //Debug.Log("Filling Glass");
+            amount += 50;
         }
             
     }
 
-    public void Drop()
-    {
-        
-    }
 
     public void Update()
     {
-        if(amount >= 100)
+
+        if(amount == 50)
         {
-            Debug.Log("Filling");
+            Debug.Log($"Amount : {amount}");
+            drink01.SetActive(true);
+        }
+        else if (amount >= 100)
+        {
+            //Debug.Log("Filled");
+            Debug.Log($"Amount : {amount}");
             filled = true;
+            drink02.SetActive(true);
         }
     }
 

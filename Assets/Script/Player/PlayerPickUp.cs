@@ -29,13 +29,11 @@ public class PlayerPickUp : MonoBehaviour
     private Transform glassesEmpty;
 
     [SerializeField]
-    private bool pourDrink = false;
-
-    [SerializeField]
     [Min(1)]
     private float hitRange = 3;
 
     private RaycastHit hit;
+    private RaycastHit hit2;
 
 
     private void Update()
@@ -57,10 +55,10 @@ public class PlayerPickUp : MonoBehaviour
             {
                 Drop();
             }
-
+            
             if (Physics.Raycast(playerCameraTransform.position,
            playerCameraTransform.forward,
-           out hit,
+           out hit2,
            hitRange,
            tapLayerMask))
             {
@@ -69,18 +67,12 @@ public class PlayerPickUp : MonoBehaviour
 
                 if (inHandItem != null && Input.GetKeyDown(KeyCode.Q))
                 {
-                    pourDrink = true;
+                    inHandItem.GetComponent<Glass>().FillGlass();
                 }
-                else
-                {
-                    pourDrink = false;
-                }
+                
             }
-            if(pourDrink)
-            {
-                inHandItem.GetComponent<Glass>().FillGlass();
-            }
-
+            
+            
        
             return;
         }
@@ -155,3 +147,43 @@ public class PlayerPickUp : MonoBehaviour
      
 }
 
+/*
+  
+  
+   if (inHandItem != null)
+        {
+            //Dropping
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                Drop();
+            }
+            
+            if (Physics.Raycast(playerCameraTransform.position,
+           playerCameraTransform.forward,
+           out hit,
+           hitRange,
+           tapLayerMask))
+            {
+                //Debug.Log("Tap");
+                hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
+
+                if (inHandItem != null && Input.GetKeyDown(KeyCode.Q))
+                {
+                    pourDrink = true;
+                }
+                else
+                {
+                    pourDrink = false;
+                }
+            }
+            if(pourDrink)
+            {
+                inHandItem.GetComponent<Glass>().FillGlass();
+            }
+            
+       
+            return;
+        }
+
+
+ */

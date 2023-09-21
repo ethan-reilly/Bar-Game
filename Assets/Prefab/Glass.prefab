@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6168586745594505857}
   m_Layer: 7
   m_Name: Glass
-  m_TagString: Untagged
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.02011416, y: 0.020114155, z: 0.040894493}
-  m_Center: {x: 4.6566134e-10, y: 1.7929305e-18, z: 0.0002523325}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5828171276443204366
 MonoBehaviour:
   m_ObjectHideFlags: 0

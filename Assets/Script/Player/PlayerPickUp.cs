@@ -12,7 +12,7 @@ public class PlayerPickUp : MonoBehaviour
 
     [SerializeField]
     private LayerMask tapLayerMask;
-
+    
     [SerializeField]
     private Transform playerCameraTransform;
 
@@ -60,12 +60,13 @@ public class PlayerPickUp : MonoBehaviour
            playerCameraTransform.forward,
            out hit2,
            hitRange,
-           tapLayerMask))
+           tapLayerMask) && inHandItem.CompareTag("Glass"))
             {
                 //Debug.Log("Tap");
                 hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
 
-                if (inHandItem != null && Input.GetKeyDown(KeyCode.Q))
+                if (inHandItem.CompareTag("Glass") && Input.GetKeyDown(KeyCode.Q))
+                //if (inHandItem == inHandItem.GetComponent<Glass>() && Input.GetKeyDown(KeyCode.Q))
                 {
                     inHandItem.GetComponent<Glass>().FillGlass();
                 }
@@ -96,6 +97,7 @@ public class PlayerPickUp : MonoBehaviour
         }
 
 
+
     }
 
     private void Interact()
@@ -103,7 +105,7 @@ public class PlayerPickUp : MonoBehaviour
         //   Debug.Log("Picking up " + hit.collider.name);
         if (hit.collider != null)
         {
-            if (hit.collider.GetComponent<Glass>())
+            if (hit.collider.GetComponent<Glass>() || hit.collider.GetComponent<Bottle>())
             {
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
 

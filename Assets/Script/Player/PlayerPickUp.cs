@@ -23,10 +23,13 @@ public class PlayerPickUp : MonoBehaviour
     private Transform pickUpParent;
 
     [SerializeField]
-    private GameObject inHandItem;
+    public GameObject inHandItem;
 
     [SerializeField]
     private Transform glassesEmpty;
+
+    [SerializeField]
+    private Transform bottlesEmpty;
 
     [SerializeField]
     [Min(1)]
@@ -100,6 +103,40 @@ public class PlayerPickUp : MonoBehaviour
 
     }
 
+    private void InteractNPC(NPC npc)
+    {
+        /// Need to :
+        /// Detect NPC
+        /// Tell if glass is full
+        /// Tell if NPC Wanted drink
+        /// 
+
+        //@TODO NOT DETECTING NPC PROPERLY
+        
+        if(inHandItem == null)
+        {
+            npc.Interact(0);
+        }
+        
+        if(inHandItem.name == "Glass")
+        {
+            if (inHandItem.GetComponent<Glass>().GetFilled())
+            {
+                npc.Interact(1);
+            }
+
+            else
+            {
+                npc.Interact(0);
+            }
+        }
+
+        if(inHandItem.name == "Bottle")
+        {
+            npc.Interact(2);
+        }
+    }
+    
     private void Interact()
     {
         //   Debug.Log("Picking up " + hit.collider.name);
@@ -123,6 +160,13 @@ public class PlayerPickUp : MonoBehaviour
                 return;
             }
 
+            if(hit.collider.GetComponent<NPC>())
+            {
+                Debug.Log("Hitting Npc");
+
+                NPC npc = hit.collider.GetComponent<NPC>();
+                InteractNPC(npc);
+            }
             //Debug.Log("Interact ended");
         }
     }
@@ -133,7 +177,11 @@ public class PlayerPickUp : MonoBehaviour
         //Dropping the item
         if (inHandItem !=null)
         {
-            inHandItem.transform.SetParent(glassesEmpty);
+            if (inHandItem.name == "Glass")
+                inHandItem.transform.SetParent(glassesEmpty);
+            else
+                inHandItem.transform.SetParent(bottlesEmpty);
+
             inHandItem = null;
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)

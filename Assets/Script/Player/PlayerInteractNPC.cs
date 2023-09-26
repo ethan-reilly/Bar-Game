@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerInteractNPC : MonoBehaviour
 {
-
+    
     [SerializeField]
     private GameObject interactUI;
+
+    PlayerPickUp playerPickUp;
+    void Awake()
+    {
+        playerPickUp = GetComponent<PlayerPickUp>();
+    
+    }
 
     void Update()
     {
@@ -20,11 +27,18 @@ public class PlayerInteractNPC : MonoBehaviour
             {
                if(collider.TryGetComponent(out NPC npc))
                 {
+                    Debug.Log("Interacting with NPC.");
 
-                    npc.Interact();
+                    if (playerPickUp.inHandItem.CompareTag("Glass"))
+                            {
+                        //npc.Interact();
+                    }
+                    
                 }
             }
             
         }
     }
+
+    
 }

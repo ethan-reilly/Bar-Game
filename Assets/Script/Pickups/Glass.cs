@@ -37,17 +37,30 @@ public class Glass : MonoBehaviour
 
         if(amount == 50)
         {
-            Debug.Log($"Amount : {amount}");
+            //Debug.Log($"Amount : {amount}");
             drink01.SetActive(true);
         }
         else if (amount >= 100)
         {
             //Debug.Log("Filled");
-            Debug.Log($"Amount : {amount}");
+            //Debug.Log($"Amount : {amount}");
             filled = true;
             drink02.SetActive(true);
         }
     }
 
+
+    public void EmptyGlass()
+    {
+        amount = 0;
+        filled = false;
+        drink01.SetActive(false);
+        drink02.SetActive(false);
+    }
+
+    public bool GetFilled()
+    {
+        return filled;
+    }
 
 }

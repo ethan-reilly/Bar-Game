@@ -8,11 +8,15 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private Transform moveTransformPosition;
 
+    [SerializeField]
+    private GameObject inHandItem = null;
+
     private NavMeshAgent navMeshAgent;
     
     private bool hasDrink = false;
 
-    private bool wantsDrink = false;
+    private bool wantsPint = false;
+    private bool wantsBottle = false;
 
     public void Awake()
     {
@@ -21,18 +25,58 @@ public class NPC : MonoBehaviour
 
     public void Update()
     {
-        if (true)
+
+        // Need to randomise what drink wants
+        // For now just wants pint
+        SetWantsPint(true);
+        
+        if (wantsPint || wantsBottle)
         {
-            // navMeshAgent.SetDestination(destination.position);#
-            navMeshAgent.destination = moveTransformPosition.position;
+            if (!hasDrink)
+            {
+                // navMeshAgent.SetDestination(destination.position);#
+                navMeshAgent.destination = moveTransformPosition.position;
+
+                
+            }
             
         }
     }
 
-    public void Interact()
+    public void Interact(int x)
     {
-       //Debug.Log("Interacting with NPC.");
-       
+        //Debug.Log("Interacting with NPC.");
+        if (!hasDrink)
+        {
+            if (wantsPint)
+            {
+                if(x == 1)
+                {
+                    Debug.Log("Correct Drink");
+                }
+                else
+                {
+                    Debug.Log("Wrong Drink");
+                }
+            }
+
+            if(wantsBottle)
+            {
+                if (x == 2)
+                {
+                    Debug.Log("Correct Drink");
+                }
+                else
+                {
+                    Debug.Log("Wrong Drink");
+                }
+            }
+        }
+            
+        else
+        {
+            Debug.Log("NPC already has a drink.");
+        }
     }
 
 
@@ -47,13 +91,24 @@ public class NPC : MonoBehaviour
         hasDrink = drink;
     }
 
-    public bool WantsDrink()
+    public bool WantsPint()
     {
-        return wantsDrink;
+        return wantsPint;
     }
 
-    public void SetWantsDrink(bool drink)
+    public void SetWantsPint(bool drink)
     {
-        wantsDrink = drink;
+        wantsPint = drink;
     }
+
+    public bool WantsBottle()
+    {
+        return wantsBottle;
+    }
+
+    public void SetWantsBottle(bool drink)
+    {
+        wantsBottle = drink;
+    }
+    
 }

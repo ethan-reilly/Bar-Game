@@ -11,6 +11,11 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private GameObject inHandItem = null;
 
+    [SerializeField]
+    private Transform pickUpNpc;
+
+    PlayerPickUp playerPickUp;
+
     private NavMeshAgent navMeshAgent;
     
     private bool hasDrink = false;
@@ -27,9 +32,10 @@ public class NPC : MonoBehaviour
     {
 
         // Need to randomise what drink wants
-        // For now just wants pint
-        //SetWantsPint(true);
-        SetWantsBottle(true);
+        // For now just wants pint:
+        
+        SetWantsPint(true);
+        //SetWantsBottle(true);
         
         if (wantsPint || wantsBottle)
         {
@@ -44,7 +50,8 @@ public class NPC : MonoBehaviour
         }
     }
 
-    public void Interact(int x)
+    
+    public void Interact(int x, GameObject item)
     {
         //Debug.Log("Interacting with NPC.");
         if (!hasDrink)
@@ -55,6 +62,14 @@ public class NPC : MonoBehaviour
                 {
                     Debug.Log("Correct Drink");
                     hasDrink = true;
+
+                    inHandItem = item;
+                    
+                    inHandItem.transform.position = Vector3.zero;
+                    //inHandItem.transform.rotation = Quaternion.identity;
+                    inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    inHandItem.transform.SetParent(pickUpNpc.transform, false);
+                    
                 }
                 else
                 {

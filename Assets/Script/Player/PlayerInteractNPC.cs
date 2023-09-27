@@ -9,10 +9,10 @@ public class PlayerInteractNPC : MonoBehaviour
     private GameObject interactUI;
 
     PlayerPickUp playerPickUp;
+
     void Awake()
     {
         playerPickUp = GetComponent<PlayerPickUp>();
-    
     }
 
     void Update()
@@ -37,17 +37,22 @@ public class PlayerInteractNPC : MonoBehaviour
                             // Check if glass is filled
                             if (glass.GetFilled())
                             {
-                                npc.Interact(1);
+                                npc.Interact(1, playerPickUp.inHandItem);
+                                Debug.Log($"Item: " + playerPickUp.inHandItem.name);
+                              
+                                // @TODO Check if order correct before losing drink
+                                // playerPickUp.inHandItem = null;
                             }
                             else
                             {
-                                npc.Interact(0);
+                                npc.Interact(0, playerPickUp.inHandItem);
                             }
                         }
                     }
                     else if (playerPickUp.inHandItem.CompareTag("Bottle"))
                     {
-                        npc.Interact(2);
+                        npc.Interact(2, playerPickUp.inHandItem);
+                       // playerPickUp.inHandItem = null;
 
                     }
                 }

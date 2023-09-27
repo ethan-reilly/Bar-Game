@@ -33,7 +33,7 @@ public class PlayerPickUp : MonoBehaviour
 
     [SerializeField]
     [Min(1)]
-    private float hitRange = 3;
+    private float hitRange = 4;
 
     private RaycastHit hit;
     private RaycastHit hit2;

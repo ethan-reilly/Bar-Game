@@ -27,18 +27,35 @@ public class PlayerInteractNPC : MonoBehaviour
             {
                if(collider.TryGetComponent(out NPC npc))
                 {
-                    Debug.Log("Interacting with NPC.");
-
+                   // Debug.Log("Interacting with NPC.");
+                   
+                    // If player has glass:
                     if (playerPickUp.inHandItem.CompareTag("Glass"))
+                    {
+                        if (playerPickUp.inHandItem.TryGetComponent(out Glass glass))
+                        {
+                            // Check if glass is filled
+                            if (glass.GetFilled())
                             {
-                        //npc.Interact();
+                                npc.Interact(1);
+                            }
+                            else
+                            {
+                                npc.Interact(0);
+                            }
+                        }
                     }
-                    
+                    else if (playerPickUp.inHandItem.CompareTag("Bottle"))
+                    {
+                        npc.Interact(2);
+
+                    }
                 }
+                    
             }
-            
         }
+            
     }
+}
 
     
-}

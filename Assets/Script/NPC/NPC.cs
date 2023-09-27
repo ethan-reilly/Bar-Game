@@ -28,7 +28,8 @@ public class NPC : MonoBehaviour
 
         // Need to randomise what drink wants
         // For now just wants pint
-        SetWantsPint(true);
+        //SetWantsPint(true);
+        SetWantsBottle(true);
         
         if (wantsPint || wantsBottle)
         {
@@ -53,6 +54,7 @@ public class NPC : MonoBehaviour
                 if(x == 1)
                 {
                     Debug.Log("Correct Drink");
+                    hasDrink = true;
                 }
                 else
                 {
@@ -65,6 +67,7 @@ public class NPC : MonoBehaviour
                 if (x == 2)
                 {
                     Debug.Log("Correct Drink");
+                    hasDrink = true;
                 }
                 else
                 {

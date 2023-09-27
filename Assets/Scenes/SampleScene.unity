@@ -4363,8 +4363,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.63
+  m_Height: 2.33
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1605339863
@@ -5131,7 +5131,7 @@ MonoBehaviour:
   inHandItem: {fileID: 0}
   glassesEmpty: {fileID: 573679549}
   bottlesEmpty: {fileID: 462019441}
-  hitRange: 3
+  hitRange: 4
 --- !u!114 &1885223311
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -98,8 +98,7 @@ public class PlayerPickUp : MonoBehaviour
         }
 
     }
-  
-
+ 
     private void Interact()
     {
         //   Debug.Log("Picking up " + hit.collider.name);
@@ -110,6 +109,7 @@ public class PlayerPickUp : MonoBehaviour
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
 
                 inHandItem = hit.collider.gameObject;
+                
                 inHandItem.transform.position = Vector3.zero;
                 //inHandItem.transform.rotation = Quaternion.identity;
                 inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
@@ -130,66 +130,22 @@ public class PlayerPickUp : MonoBehaviour
 
          private void Drop()
         { 
-        //Dropping the item
-        if (inHandItem !=null)
-        {
-            if (inHandItem.name == "Glass")
-                inHandItem.transform.SetParent(glassesEmpty);
-            else
-                inHandItem.transform.SetParent(bottlesEmpty);
-
-            inHandItem = null;
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-            if (rb != null)
+            //Dropping the item
+            if (inHandItem !=null)
             {
-                rb.isKinematic = false;
-            }
-        }
-        //return;
-    }
-         
-
-   
-     
-}
-
-/*
-  
-  
-   if (inHandItem != null)
-        {
-            //Dropping
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                Drop();
-            }
-            
-            if (Physics.Raycast(playerCameraTransform.position,
-           playerCameraTransform.forward,
-           out hit,
-           hitRange,
-           tapLayerMask))
-            {
-                //Debug.Log("Tap");
-                hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-
-                if (inHandItem != null && Input.GetKeyDown(KeyCode.Q))
-                {
-                    pourDrink = true;
-                }
+                if (inHandItem.name == "Glass")
+                    inHandItem.transform.SetParent(glassesEmpty);
                 else
+                    inHandItem.transform.SetParent(bottlesEmpty);
+
+                inHandItem = null;
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                if (rb != null)
                 {
-                    pourDrink = false;
+                    rb.isKinematic = false;
                 }
-            }
-            if(pourDrink)
-            {
-                inHandItem.GetComponent<Glass>().FillGlass();
-            }
-            
-       
-            return;
-        }
-
-
- */
+             }
+    
+          }
+             
+}

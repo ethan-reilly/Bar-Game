@@ -37,11 +37,18 @@ public class PlayerInteractNPC : MonoBehaviour
                             // Check if glass is filled
                             if (glass.GetFilled())
                             {
-                                npc.Interact(1, playerPickUp.inHandItem);
-                                Debug.Log($"Item: " + playerPickUp.inHandItem.name);
-                              
-                                // @TODO Check if order correct before losing drink
-                                // playerPickUp.inHandItem = null;
+                                if(npc.WantsPint() & !npc.GetDrink())
+                                {
+                                    npc.Interact(1, playerPickUp.inHandItem);
+                                    //Debug.Log($"Item: " + playerPickUp.inHandItem.name);
+                                    playerPickUp.inHandItem = null;
+
+                                    Debug.Log($"inHandItem" + playerPickUp.inHandItem);
+                                }
+                                else 
+                                {
+                                    npc.Interact(1, playerPickUp.inHandItem);
+                                }
                             }
                             else
                             {
@@ -51,9 +58,11 @@ public class PlayerInteractNPC : MonoBehaviour
                     }
                     else if (playerPickUp.inHandItem.CompareTag("Bottle"))
                     {
-                        npc.Interact(2, playerPickUp.inHandItem);
-                       // playerPickUp.inHandItem = null;
-
+                        if (npc.WantsBottle() & !npc.GetDrink())
+                        {
+                            npc.Interact(2, playerPickUp.inHandItem);
+                            playerPickUp.inHandItem = null;
+                        }
                     }
                 }
                     

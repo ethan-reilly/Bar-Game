@@ -34,8 +34,8 @@ public class NPC : MonoBehaviour
         // Need to randomise what drink wants
         // For now just wants pint:
         
-        SetWantsPint(true);
-        //SetWantsBottle(true);
+        //SetWantsPint(true);
+        SetWantsBottle(true);
         
         if (wantsPint || wantsBottle)
         {
@@ -64,16 +64,23 @@ public class NPC : MonoBehaviour
                     hasDrink = true;
 
                     inHandItem = item;
+                    //Debug.Log($"Glass Pos A: " + inHandItem.transform.position);
+
+                    //inHandItem.transform.position = Vector3.zero;
+                    //Debug.Log($"Glass Pos B: " + inHandItem.transform.position);
                     
-                    inHandItem.transform.position = Vector3.zero;
                     //inHandItem.transform.rotation = Quaternion.identity;
                     inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     inHandItem.transform.SetParent(pickUpNpc.transform, false);
-                    
+
+                }
+                else if(x == 0)
+                {
+                    Debug.Log("Wrong Drink");
                 }
                 else
                 {
-                    Debug.Log("Wrong Drink");
+                    
                 }
             }
 
@@ -83,6 +90,16 @@ public class NPC : MonoBehaviour
                 {
                     Debug.Log("Correct Drink");
                     hasDrink = true;
+
+                    inHandItem = item;
+                    //Debug.Log($"Glass Pos A: " + inHandItem.transform.position);
+
+                    //inHandItem.transform.position = Vector3.zero;
+                    //Debug.Log($"Glass Pos B: " + inHandItem.transform.position);
+
+                    //inHandItem.transform.rotation = Quaternion.identity;
+                    inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    inHandItem.transform.SetParent(pickUpNpc.transform, false);
                 }
                 else
                 {

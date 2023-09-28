@@ -18,6 +18,9 @@ public class NPC : MonoBehaviour
     GameManager gameManager;
 
     private NavMeshAgent navMeshAgent;
+
+    [SerializeField]
+    private Animator animator;
     
     private bool hasDrink = false;
 
@@ -28,6 +31,7 @@ public class NPC : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //animator = GetComponent<Animator>();
     }
 
     public void Update()
@@ -49,6 +53,17 @@ public class NPC : MonoBehaviour
                 
             }
             
+        }
+        
+        if(navMeshAgent.remainingDistance > 0.1f)
+        {
+            Debug.Log("Walking");
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            Debug.Log("Idle");
+            animator.SetBool("isWalking", false); 
         }
     }
 
@@ -76,6 +91,8 @@ public class NPC : MonoBehaviour
                     inHandItem.transform.SetParent(pickUpNpc.transform, false);
 
                     navMeshAgent.destination = gameManager.GenerateWaypoint().position;
+                    
+                        
                     inHandItem.layer = 0;
 
                 }

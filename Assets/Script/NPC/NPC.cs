@@ -15,6 +15,7 @@ public class NPC : MonoBehaviour
     private Transform pickUpNpc;
 
     PlayerPickUp playerPickUp;
+    GameManager gameManager;
 
     private NavMeshAgent navMeshAgent;
     
@@ -26,6 +27,7 @@ public class NPC : MonoBehaviour
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void Update()
@@ -34,8 +36,8 @@ public class NPC : MonoBehaviour
         // Need to randomise what drink wants
         // For now just wants pint:
         
-        //SetWantsPint(true);
-        SetWantsBottle(true);
+        SetWantsPint(true);
+        //SetWantsBottle(true);
         
         if (wantsPint || wantsBottle)
         {
@@ -73,14 +75,17 @@ public class NPC : MonoBehaviour
                     inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     inHandItem.transform.SetParent(pickUpNpc.transform, false);
 
+                    navMeshAgent.destination = gameManager.GenerateWaypoint().position;
+                    inHandItem.layer = 0;
+
                 }
                 else if(x == 0)
                 {
                     Debug.Log("Wrong Drink");
                 }
-                else
+                else if (x == 2)
                 {
-                    
+                    Debug.Log("Wring Drink");
                 }
             }
 
@@ -100,6 +105,10 @@ public class NPC : MonoBehaviour
                     //inHandItem.transform.rotation = Quaternion.identity;
                     inHandItem.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
                     inHandItem.transform.SetParent(pickUpNpc.transform, false);
+
+                    navMeshAgent.destination = gameManager.GenerateWaypoint().position;
+
+                    inHandItem.layer = 0;
                 }
                 else
                 {

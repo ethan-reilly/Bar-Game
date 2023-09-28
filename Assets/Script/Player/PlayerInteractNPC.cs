@@ -63,6 +63,11 @@ public class PlayerInteractNPC : MonoBehaviour
                             npc.Interact(2, playerPickUp.inHandItem);
                             playerPickUp.inHandItem = null;
                         }
+
+                        if (npc.WantsPint() & !npc.GetDrink())
+                        {
+                            npc.Interact(2, playerPickUp.inHandItem);
+                        }
                     }
                 }
                     

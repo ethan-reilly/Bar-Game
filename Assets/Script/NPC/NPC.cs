@@ -27,10 +27,21 @@ public class NPC : MonoBehaviour
     private bool wantsPint = false;
     private bool wantsBottle = false;
 
+    //UI Stuff
+    [SerializeField]
+    private GameObject UIPint;
+        
+    [SerializeField]
+    private GameObject UIBottle;
+
+    [SerializeField]
+    private GameObject UIThanks;
+
     public void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerPickUp = GameObject.Find("First Person Player").GetComponent<PlayerPickUp>();
         //animator = GetComponent<Animator>();
     }
 
@@ -57,16 +68,36 @@ public class NPC : MonoBehaviour
         
         if(navMeshAgent.remainingDistance > 0.1f)
         {
-            Debug.Log("Walking");
+            //Debug.Log("Walking");
             animator.SetBool("isWalking", true);
         }
         else
         {
-            Debug.Log("Idle");
+            //Debug.Log("Idle");
             animator.SetBool("isWalking", false); 
         }
     }
 
+    public void Interact(int x)
+    {
+        if(!hasDrink)
+        {
+            if(wantsPint)
+            {
+                UIPint.SetActive(true);
+                Invoke("UIHandler", 2f);
+                Debug.Log("Wrong Drink");
+            }
+
+            if(wantsBottle)
+            {
+                UIBottle.SetActive(true);
+                Invoke("UIHandler", 2f);
+                Debug.Log("Wrong Drink");
+            }
+        
+        }
+    }
     
     public void Interact(int x, GameObject item)
     {
@@ -79,6 +110,7 @@ public class NPC : MonoBehaviour
                 {
                     Debug.Log("Correct Drink");
                     hasDrink = true;
+                    
 
                     inHandItem = item;
                     //Debug.Log($"Glass Pos A: " + inHandItem.transform.position);
@@ -94,14 +126,21 @@ public class NPC : MonoBehaviour
                     
                         
                     inHandItem.layer = 0;
+                    UIThanks.SetActive(true);
 
+                    playerPickUp.AddMoney();
+                    Invoke("UIHandler", 2f);
                 }
                 else if(x == 0)
                 {
+                    UIPint.SetActive(true);
+                    Invoke("UIHandler", 2f);
                     Debug.Log("Wrong Drink");
                 }
                 else if (x == 2)
                 {
+                    UIPint.SetActive(true);
+                    Invoke("UIHandler", 2f);
                     Debug.Log("Wring Drink");
                 }
             }
@@ -126,9 +165,16 @@ public class NPC : MonoBehaviour
                     navMeshAgent.destination = gameManager.GenerateWaypoint().position;
 
                     inHandItem.layer = 0;
+                    UIThanks.SetActive(true);
+
+                    playerPickUp.AddMoney();
+                    Invoke("UIHandler", 2f);
+
                 }
                 else
                 {
+                    UIBottle.SetActive(true);
+                    Invoke("UIHandler", 2f);
                     Debug.Log("Wrong Drink");
                 }
             }
@@ -140,6 +186,13 @@ public class NPC : MonoBehaviour
         }
     }
 
+
+    public void UIHandler()
+    {
+        UIPint.SetActive(false);
+        UIBottle.SetActive(false);
+        UIThanks.SetActive(false);
+    }
 
     // Getters and Setters
     public bool GetDrink()

@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _waypoints;
 
-    
+    [SerializeField]
+    private GameObject[] _npcs;
+
+
     void Start()
     {
         _waypoints = GameObject.FindGameObjectsWithTag("Waypoint");

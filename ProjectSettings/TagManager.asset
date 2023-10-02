@@ -7,6 +7,7 @@ TagManager:
   - Bottle
   - Glass
   - Waypoint
+  - NPC
   layers:
   - Default
   - TransparentFX

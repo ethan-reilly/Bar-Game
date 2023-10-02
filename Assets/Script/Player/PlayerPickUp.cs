@@ -38,6 +38,15 @@ public class PlayerPickUp : MonoBehaviour
     private RaycastHit hit;
     private RaycastHit hit2;
 
+    // Money
+    private int money = 0;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI moneyText;
+
+    private void Start()
+    {
+        moneyText.text = "$ " + money.ToString();
+    }
 
     private void Update()
     {
@@ -147,5 +156,13 @@ public class PlayerPickUp : MonoBehaviour
              }
     
           }
-             
+
+    public void AddMoney()
+    {
+        //Debug.Log($"Money " + money);
+        money += 5;
+        moneyText.text = "$ " + money.ToString();
+    }
+
+
 }

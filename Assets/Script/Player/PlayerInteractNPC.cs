@@ -27,10 +27,14 @@ public class PlayerInteractNPC : MonoBehaviour
             {
                if(collider.TryGetComponent(out NPC npc))
                 {
-                   // Debug.Log("Interacting with NPC.");
-                   
+                    // Debug.Log("Interacting with NPC.");
+
+                    if (playerPickUp.inHandItem == null)
+                    {
+                        npc.Interact(0);
+                    }
                     // If player has glass:
-                    if (playerPickUp.inHandItem.CompareTag("Glass"))
+                    else if (playerPickUp.inHandItem.CompareTag("Glass"))
                     {
                         if (playerPickUp.inHandItem.TryGetComponent(out Glass glass))
                         {
@@ -69,6 +73,7 @@ public class PlayerInteractNPC : MonoBehaviour
                             npc.Interact(2, playerPickUp.inHandItem);
                         }
                     }
+                
                 }
                     
             }

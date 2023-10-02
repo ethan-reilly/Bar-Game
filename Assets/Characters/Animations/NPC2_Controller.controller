@@ -110,7 +110,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPC1_Controller
+  m_Name: NPC2_Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isWalking

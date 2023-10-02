@@ -43,16 +43,22 @@ public class NPC : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerPickUp = GameObject.Find("First Person Player").GetComponent<PlayerPickUp>();
         //animator = GetComponent<Animator>();
+
+        //Randomise what drink they want
+        int drink = Random.Range(0, 2);
+        if (drink == 0)
+        {
+            wantsPint = true;
+        }
+        else
+        {
+            wantsBottle = true;
+        }
     }
 
     public void Update()
     {
 
-        // Need to randomise what drink wants
-        // For now just wants pint:
-        
-        SetWantsPint(true);
-        //SetWantsBottle(true);
         
         if (wantsPint || wantsBottle)
         {
@@ -130,6 +136,9 @@ public class NPC : MonoBehaviour
 
                     playerPickUp.AddMoney();
                     Invoke("UIHandler", 2f);
+                    
+                    Invoke("gameManager.NextCustomer()", Random.Range(3f, 5f));
+                    //gameManager.NextCustomer();
                 }
                 else if(x == 0)
                 {
@@ -169,6 +178,9 @@ public class NPC : MonoBehaviour
 
                     playerPickUp.AddMoney();
                     Invoke("UIHandler", 2f);
+
+                    Invoke("gameManager.NextCustomer()", Random.Range(3f, 5f));
+                    //gameManager.NextCustomer();
 
                 }
                 else

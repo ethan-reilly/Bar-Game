@@ -12,10 +12,20 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _npcs;
 
+    int currentCustomer = 0;
+
 
     void Start()
     {
         _waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+        _npcs = GameObject.FindGameObjectsWithTag("NPC");
+
+        for (int i = 0; i < _npcs.Length; i++)
+        {
+            _npcs[i].SetActive(false);
+        }
+
+        Invoke("NextCustomer", 3f);
     }
     
     // Update is called once per frame
@@ -23,7 +33,22 @@ public class GameManager : MonoBehaviour
     {
         
     }
-    
+
+    public void NextCustomer()
+    {
+       // Debug.Log("Next Customer");
+        if (currentCustomer < _npcs.Length)
+        {
+            _npcs[currentCustomer].SetActive(true);
+        }
+        currentCustomer++;
+    }
+
+    public GameObject[] GetNPCs()
+    {
+        return _npcs;
+    }
+
     public Transform GenerateWaypoint()
     {
 

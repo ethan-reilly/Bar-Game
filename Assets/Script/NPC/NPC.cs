@@ -137,7 +137,7 @@ public class NPC : MonoBehaviour
                     playerPickUp.AddMoney();
                     Invoke("UIHandler", 2f);
                     
-                    Invoke("gameManager.NextCustomer()", Random.Range(3f, 5f));
+                    Invoke("NextCustomer", Random.Range(3f, 5f));
                     //gameManager.NextCustomer();
                 }
                 else if(x == 0)
@@ -179,7 +179,7 @@ public class NPC : MonoBehaviour
                     playerPickUp.AddMoney();
                     Invoke("UIHandler", 2f);
 
-                    Invoke("gameManager.NextCustomer()", Random.Range(3f, 5f));
+                    Invoke("NextCustomer", Random.Range(3f, 5f));
                     //gameManager.NextCustomer();
 
                 }
@@ -198,7 +198,11 @@ public class NPC : MonoBehaviour
         }
     }
 
-
+    public void NextCustomer()
+    {
+        gameManager.NextCustomer();
+    }
+    
     public void UIHandler()
     {
         UIPint.SetActive(false);

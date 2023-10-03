@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void NextCustomer()
     {
-       // Debug.Log("Next Customer");
+        Debug.Log("Next Customer");
         if (currentCustomer < _npcs.Length)
         {
             _npcs[currentCustomer].SetActive(true);

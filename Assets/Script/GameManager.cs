@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] _npcs;
 
+
     int currentCustomer = 0;
 
 

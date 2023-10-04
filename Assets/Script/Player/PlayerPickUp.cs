@@ -20,6 +20,9 @@ public class PlayerPickUp : MonoBehaviour
     private GameObject pickUpUI;
 
     [SerializeField]
+    private GameObject pourUI;
+
+    [SerializeField]
     private Transform pickUpParent;
 
     [SerializeField]
@@ -58,6 +61,7 @@ public class PlayerPickUp : MonoBehaviour
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
             pickUpUI.SetActive(false);
+            pourUI.SetActive(false);
         }
         
         if (inHandItem != null)
@@ -76,6 +80,7 @@ public class PlayerPickUp : MonoBehaviour
             {
                 //Debug.Log("Tap");
                 hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
+                pourUI.SetActive(true);
 
                 if (inHandItem.CompareTag("Glass") && Input.GetKeyDown(KeyCode.Q))
                 //if (inHandItem == inHandItem.GetComponent<Glass>() && Input.GetKeyDown(KeyCode.Q))

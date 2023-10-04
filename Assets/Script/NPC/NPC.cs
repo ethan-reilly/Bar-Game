@@ -9,6 +9,9 @@ public class NPC : MonoBehaviour
     private Transform moveTransformPosition;
 
     [SerializeField]
+    private Transform doorWaypoint;
+
+    [SerializeField]
     private GameObject inHandItem = null;
 
     [SerializeField]
@@ -139,6 +142,7 @@ public class NPC : MonoBehaviour
                     
                     Invoke("NextCustomer", Random.Range(3f, 5f));
                     //gameManager.NextCustomer();
+                    Invoke("CustomerLeaves", Random.Range(11f, 17f));
                 }
                 else if(x == 0)
                 {
@@ -181,6 +185,7 @@ public class NPC : MonoBehaviour
 
                     Invoke("NextCustomer", Random.Range(3f, 5f));
                     //gameManager.NextCustomer();
+                    Invoke("CustomerLeaves", Random.Range(20f, 30f));
 
                 }
                 else
@@ -198,6 +203,16 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void CustomerLeaves()
+    {
+        /// If making full game would drop glass and have to clean
+        navMeshAgent.destination = doorWaypoint.position;
+        Destroy(inHandItem, 3f);
+
+        Destroy(gameObject, 7f);
+
+    }
+    
     public void NextCustomer()
     {
         gameManager.NextCustomer();

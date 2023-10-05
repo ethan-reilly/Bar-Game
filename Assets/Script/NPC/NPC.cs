@@ -15,6 +15,9 @@ public class NPC : MonoBehaviour
     private GameObject inHandItem = null;
 
     [SerializeField]
+    private GameObject money;
+
+    [SerializeField]
     private Transform pickUpNpc;
 
     PlayerPickUp playerPickUp;
@@ -119,7 +122,9 @@ public class NPC : MonoBehaviour
                 {
                     Debug.Log("Correct Drink");
                     hasDrink = true;
-                    
+                    animator.SetBool("hasDrink", true);
+
+                    Destroy(money);
 
                     inHandItem = item;
                     //Debug.Log($"Glass Pos A: " + inHandItem.transform.position);
@@ -164,6 +169,9 @@ public class NPC : MonoBehaviour
                 {
                     Debug.Log("Correct Drink");
                     hasDrink = true;
+                    animator.SetBool("hasDrink", true);
+
+                    Destroy(money);
 
                     inHandItem = item;
                     //Debug.Log($"Glass Pos A: " + inHandItem.transform.position);

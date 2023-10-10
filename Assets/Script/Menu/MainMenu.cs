@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-   public void PlayGame()
+
+    [SerializeField]
+    GameObject ReferenceImage;
+
+    [SerializeField]
+    GameObject ReferenceImageButton;
+
+    public void PlayGame()
     {
         // SceneManager.LoadScene("Level");
         Loader.Load(Loader.Scene.Level);
@@ -16,5 +23,17 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void OpenReferenceImage()
+    {
+        ReferenceImage.SetActive(true);
+        ReferenceImageButton.SetActive(true);
+    }
+
+    public void CloseReferenceImage()
+    {
+        ReferenceImage.SetActive(false);
+        ReferenceImageButton.SetActive(false);
     }
 }
